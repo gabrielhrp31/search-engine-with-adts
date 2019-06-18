@@ -10,38 +10,24 @@ public class List {
         first = null;
     }
 
-    public Boolean vazia(){
-        return last==null && first==null;
+    public Boolean empty(){
+        return length==0;
     }
 
-    public void add(String word, int line){
+    public void add(Object insert){
         Cell item = new Cell();
-        if(vazia()){
-            item.word = word;
-            item.lines.add(line);
+        if(empty()){
+            item.value = insert;
             first=item;
             last=item;
+            length++;
         }else{
-            Cell wordFound= exists(word);
-            if(wordFound!=null){
-                wordFound.lines.add(line);
-            }else{
-                item.word=word;
-                item.lines.add(line);
-                last.next=item;
-                item.prev=last;
-                last=item;
-            }
+            item.value=insert;
+            last.next=item;
+            item.prev=last;
+            last=item;
+            length++;
         }
     }
 
-    public Cell exists(String word) {
-        Cell atual = this.first;
-        while (atual != null) {
-            if (atual.word.equals(word))
-                return atual;
-            atual = atual.next;
-        }
-        return null;
-    }
 }
