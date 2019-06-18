@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Structures;
 
 
 public class SearchList {

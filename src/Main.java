@@ -1,4 +1,4 @@
-package com.company;
+import com.company.Structures.SearchList;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
