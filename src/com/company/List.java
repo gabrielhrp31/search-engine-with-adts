@@ -1,6 +1,7 @@
 package com.company;
 
 public class List {
+
     Cell first, last;
     int length;
 

@@ -1,6 +1,7 @@
 package com.company;
 
 public class Cell {
+
     Cell next, prev;
     Object value;
 

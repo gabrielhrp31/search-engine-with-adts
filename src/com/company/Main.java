@@ -1,16 +1,14 @@
 package com.company;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
         String path = args[0];
-        System.out.println("Abrindo "+ path + " para leitura");
+        System.out.println("Opening "+ path + " for lecture");
         SearchList lista = reader(path);
         lista.show();
         System.out.println();
@@ -32,7 +30,7 @@ public class Main {
             String[] words = string.split("\\s");
             words = string.trim().split("\\s+");
             for(String word: words){
-//                System.out.println(string+":"+word);
+//                System.out.println(string+ ":" + word);
                 list.add(word,index);
             }
             index++;
