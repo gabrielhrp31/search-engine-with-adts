@@ -1,4 +1,5 @@
 import com.company.Structures.SearchList;
+import com.company.Structures.HashTable;;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,10 +7,15 @@ import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         String path = args[0];
-        System.out.println("Opening "+ path + " for lecture");
-        SearchList lista = reader(path);
+        System.out.println("Opening " + path + " for lecture");
+        try {
+            SearchList lista = reader(path);
+        } catch (IOException e) {
+            System.err.printf("Erro na abertura do arquivo: %s.\n",e.getMessage());
+        }
+
         lista.show();
         System.out.println();
     }
@@ -18,20 +24,21 @@ public class Main {
         BufferedReader buffRead = new BufferedReader(new FileReader(path));
 
         String string = "";
-        int index =1;
+        int index = 1;
 
         SearchList list = new SearchList();
+        // SearchList hash = new HashTable();
 
         while (buffRead.ready()) {
 
             string = buffRead.readLine();
-            string = (String) string.replace(".","");
-            string = (String) string.replace(",","");
+            string = (String) string.replace(".", "");
+            string = (String) string.replace(",", "");
             String[] words = string.split("\\s");
             words = string.trim().split("\\s+");
-            for(String word: words){
-//                System.out.println(string+ ":" + word);
-                list.add(word,index);
+            for (String word : words) {
+                // System.out.println(string+ ":" + word);
+                list.add(word, index);
             }
             index++;
         }

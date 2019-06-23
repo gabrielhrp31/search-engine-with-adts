@@ -1,9 +1,9 @@
-package com.company.Structures.HashTableOpenAdressing;
+package com.company.Structures;
 
 /*
     Represents one cell from the table
  */
-public class Cell {
+public class HashCell {
 
     String key;
     Object item;

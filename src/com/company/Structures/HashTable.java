@@ -1,17 +1,17 @@
-package com.company.Structures.HashTableOpenAdressing;
+package com.company.Structures;
 
 import java.util.Random;
 
 public class HashTable {
 
     private int tableSize;
-    private Cell tableCell[];
+    private HashCell tableCell[];
     private int weight[];
 
 
     public HashTable(int tableSize, int maxKeySize) {
         this.tableSize = tableSize;
-        this.tableCell = new Cell[this.tableSize];
+        this.tableCell = new HashCell[this.tableSize];
         //initializing
         for (int i = 0; i < this.tableSize; i++) {
             this.tableCell[i] = null;
