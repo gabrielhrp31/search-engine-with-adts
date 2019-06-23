@@ -1,5 +1,4 @@
 import com.company.Structures.SearchList;
-import com.company.Structures.HashTable;;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,9 +8,10 @@ public class Main {
 
     public static void main(String[] args) {
         String path = args[0];
+        SearchList lista = null;
         System.out.println("Opening " + path + " for lecture");
         try {
-            SearchList lista = reader(path);
+            lista = reader(path);
         } catch (IOException e) {
             System.err.printf("Erro na abertura do arquivo: %s.\n",e.getMessage());
         }
@@ -27,7 +27,7 @@ public class Main {
         int index = 1;
 
         SearchList list = new SearchList();
-        // SearchList hash = new HashTable();
+        // SearchList hash = new HashMapTable();
 
         while (buffRead.ready()) {
 

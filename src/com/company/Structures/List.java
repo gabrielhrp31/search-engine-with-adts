@@ -2,7 +2,7 @@ package com.company.Structures;
 
 public class List {
 
-    Cell first, last;
+    ListCell first, last;
     int length;
 
     List(){
@@ -16,7 +16,7 @@ public class List {
     }
 
     public void add(Object insert){
-        Cell item = new Cell();
+        ListCell item = new ListCell();
         if(empty()){
             item.value = insert;
             first=item;

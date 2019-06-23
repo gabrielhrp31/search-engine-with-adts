@@ -2,42 +2,30 @@ package com.company.Structures;
 
 import java.util.Random;
 
-public class HashTable {
+public class HashMapTable {
 
     private int tableSize;
-    private HashCell tableCell[];
+    private HashMapCell tableCell[];
     private int weight[];
 
 
-    public HashTable(int tableSize, int maxKeySize) {
+    public HashMapTable(int tableSize, int maxKeySize) {
         this.tableSize = tableSize;
-        this.tableCell = new HashCell[this.tableSize];
+        this.tableCell = new HashMapCell[this.tableSize];
         //initializing
         for (int i = 0; i < this.tableSize; i++) {
             this.tableCell[i] = null;
         }
-        this.weight = this.generateWeights(maxKeySize);
-    }
-
-    /**
-     * Weight for each character from one key with
-     * @param n characters
-     * @return
-     */
-    private int[] generateWeights(int n){
-        int w[] = new int[n];
-        Random random = new Random();
-        for (int i = 0; i < n; i++) {
-            w[i] = random.nextInt(tableSize) +1;
-        }
-        return w;
+        this.weight = HashMapUtil.generateWeights(maxKeySize, tableSize);
     }
 
 
+
+
     /**
-     *
+     * First Open Hash strategy  : HASHING LINEAR
      * HASHING LINEAR position Hj in the table
-     *  -> Hj= (h(x) +j) modM, para 1≤ j ≤ M−1.
+     *  -> Hj= (h(x) +j) % M, para 1≤ j ≤ M−1.
      *
      * Transformation function
      * @param key
@@ -79,7 +67,7 @@ public class HashTable {
             }
 
             if(aux < this.tableSize){
-                this.tableCell[index] = new Cell(key, item);
+                this.tableCell[index] = new HashMapCell(key, item);
             } else {
                 System.out.printf("ERROR! FULL TABLE.");
             }

@@ -1,11 +1,11 @@
 package com.company.Structures;
 
-public class Cell {
+public class ListCell {
 
-    Cell next, prev;
+    ListCell next, prev;
     Object value;
 
-    Cell(){
+    ListCell(){
         this.next=null;
         this.prev=null;
         this.value = null;
