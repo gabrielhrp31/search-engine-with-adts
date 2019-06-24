@@ -1,4 +1,4 @@
-package com.company.Structures;
+package structures.hash;
 
 /**
  *  Linked Linear List for each address of the table,

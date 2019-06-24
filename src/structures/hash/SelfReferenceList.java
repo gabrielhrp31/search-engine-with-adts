@@ -1,4 +1,4 @@
-package com.company.Structures;
+package structures.hash;
 
 public class SelfReferenceList {
 

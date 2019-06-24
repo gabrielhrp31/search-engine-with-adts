@@ -1,6 +1,4 @@
-package com.company.Structures;
-
-import java.util.Random;
+package structures.hash;
 
 public class HashMapTable {
 

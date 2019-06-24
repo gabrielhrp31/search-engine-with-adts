@@ -1,4 +1,4 @@
-package com.company.Structures;
+package structures.hash;
 
 /*
     Represents one cell from the table

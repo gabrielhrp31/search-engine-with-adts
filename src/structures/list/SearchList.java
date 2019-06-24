@@ -1,4 +1,4 @@
-package com.company.Structures;
+package structures.list;
 
 
 public class SearchList {
@@ -19,12 +19,16 @@ public class SearchList {
             last = item;
             length++;
         } else {
-            item.value = word;
-            item.lines.add(line);
-            item.prev = last;
-            last.next = item;
-            last = item;
-            length++;
+            if(exists(word)!=null){
+                item.lines.add(line);
+            }else{
+                item.value = word;
+                item.lines.add(line);
+                item.prev = last;
+                last.next = item;
+                last = item;
+                length++;
+            }
 
         }
     }
