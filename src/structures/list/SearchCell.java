@@ -2,6 +2,6 @@ package structures.list;
 
 public class SearchCell extends ListCell {
 
-    SearchCell next,prev;
+    SearchCell next;
     List lines = new List();
 }

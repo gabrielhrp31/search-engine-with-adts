@@ -5,30 +5,41 @@ public class List {
     ListCell first, last;
     int length;
 
-    List(){
+    public List(){
         length=0;
         last = null;
         first = null;
     }
 
     public Boolean empty(){
-        return length==0;
+        return (first==null && last==null);
     }
 
     public void add(Object insert){
         ListCell item = new ListCell();
-        if(empty()){
+        if(this.empty()){
             item.value = insert;
             first=item;
             last=item;
-            length++;
         }else{
-            item.value=insert;
-            last.next=item;
-            item.prev=last;
-            last=item;
-            length++;
+            if(!last.value.equals(insert)){
+                last.next=item;
+                item.value=insert;
+                last=item;
+                length++;
+            }
         }
+    }
+
+
+
+    public void show() {
+        ListCell current = this.first;
+        while (current != null) {
+            System.out.print(current.value + " ");
+            current = current.next;
+        }
+        System.out.println();
     }
 
 }

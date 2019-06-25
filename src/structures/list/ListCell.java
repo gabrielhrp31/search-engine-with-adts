@@ -2,12 +2,11 @@ package structures.list;
 
 public class ListCell {
 
-    ListCell next, prev;
+    ListCell next;
     Object value;
 
     ListCell(){
         this.next=null;
-        this.prev=null;
         this.value = null;
     }
 }
