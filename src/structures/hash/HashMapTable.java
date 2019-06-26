@@ -168,7 +168,7 @@ public class HashMapTable implements Runnable{
         for(int i = 0; i < hashTable.length; i++){
 
            if(hashTable[i] != null){
-               print_line.print(hashTable[i].getKeyWord());
+               print_line.print(hashTable[i].getKeyWord()+" ");
                hashTable[i].getLines().showInFile(write);
            }
         }
