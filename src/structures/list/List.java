@@ -1,5 +1,8 @@
 package structures.list;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 public class List {
 
     ListCell first, last;
@@ -31,8 +34,6 @@ public class List {
         }
     }
 
-
-
     public void show() {
         ListCell current = this.first;
         while (current != null) {
@@ -40,6 +41,16 @@ public class List {
             current = current.next;
         }
         System.out.println();
+    }
+
+    public void showInFile(FileWriter write) {
+        ListCell current = this.first;
+        PrintWriter print_line = new PrintWriter(write);
+        while (current != null) {
+            print_line.print(current.value + " ");
+            current = current.next;
+        }
+        print_line.println();
     }
 
 }

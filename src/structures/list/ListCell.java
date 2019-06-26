@@ -2,8 +2,8 @@ package structures.list;
 
 public class ListCell {
 
-    ListCell next;
-    Object value;
+    public ListCell next;
+    public Object value;
 
     ListCell(){
         this.next=null;

@@ -40,7 +40,7 @@ public class Node {
 
     public Node get( String key )
     {
-        if ( this.word.equals( key ) )
+        if ( this.word.compareToIgnoreCase( key )==0 )
         {
             return this;
         }

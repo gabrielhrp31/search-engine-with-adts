@@ -3,14 +3,19 @@ package structures.list;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import tools.printtools.PrintTools;
 
 public class SearchList implements Runnable {
 
-    SearchCell first, last;
-    int length = 0;
+    public SearchCell first, last;
+    public int length = 0;
     private String path;
     private SearchList keywords;
+
 
     public SearchList(String path,SearchList keywords){
         this.path = path;
@@ -23,20 +28,29 @@ public class SearchList implements Runnable {
 
 
     public void run(){
-        SearchList lista = null;
+        SearchList list = null;
+        long beginTime, endTime;
+        PrintTools pTools = new PrintTools();
+        ArrayList<Long> times = new ArrayList<>();
+        
         try {
-            System.out.println("Opening " + path + " for lecture of text");
-            lista = textReader(path, keywords);
-            lista.show();
+            System.out.println("-------------------------------------");
+            System.out.println("\tList");
+            System.out.println();
+            for(int i=0;i<10;i++){
+                beginTime = System.nanoTime();
+                list = textReader(path, keywords);
+                list.sort();
+                list.printInFile();
+                endTime =  System.nanoTime();
+                times.add(endTime - beginTime);
+            }
+            list.show();
+            pTools.printTimeInFiles(times, "List");
         } catch (IOException e) {
-            System.err.printf("Erro na abertura do arquivo: %s.\n",e.getMessage());
+            System.err.printf("Error while opening the file: %s.\n",e.getMessage());
         }
     }
-
-
-
-
-
 
     public SearchList textReader(String path, SearchList keywords) throws IOException {
         BufferedReader buffRead = new BufferedReader(new FileReader(path));
@@ -45,7 +59,6 @@ public class SearchList implements Runnable {
         int index = 1;
 
         SearchList list = new SearchList(null, null);
-        // SearchList hash = new HashMapTable();
 
         while (buffRead.ready()) {
 
@@ -65,6 +78,48 @@ public class SearchList implements Runnable {
         return list;
     }
 
+    public void sort() {
+        if (length > 1) {
+            boolean wasChanged;
+
+            do {
+                SearchCell current = first;
+                SearchCell previous = null;
+                SearchCell next = first.next;
+                wasChanged = false;
+
+                while (next != null) {
+                    String currentValue = (String)current.value;
+                    String nextValue = (String)next.value;
+                    if (currentValue.compareToIgnoreCase(nextValue)>1) {
+                        wasChanged = true;
+
+                        if (previous != null) {
+                            SearchCell sig = next.next;
+
+                            previous.next = next;
+                            next.next = current;
+                            current.next = sig;
+                        } else {
+                            SearchCell sig = next.next;
+
+                            first = next;
+                            next.next = current;
+                            current.next = sig;
+                        }
+
+                        previous = next;
+                        next = current.next;
+                    } else {
+                        previous = current;
+                        current = next;
+                        next = next.next;
+                    }
+                }
+            } while (wasChanged);
+        }
+    }
+
     public void add(String word, int line) {
         SearchCell item = new SearchCell();
         if (empty()) {
@@ -72,6 +127,7 @@ public class SearchList implements Runnable {
             item.lines.add(line);
             first = item;
             last = item;
+            length++;
         } else {
             SearchCell wordFound = exists(word);
             if(wordFound!=null){
@@ -81,9 +137,9 @@ public class SearchList implements Runnable {
                 item.lines.add(line);
                 last.next = item;
                 last = item;
+                length++;
             }
         }
-        length++;
     }
 
     public SearchCell exists(String word) {
@@ -91,7 +147,7 @@ public class SearchList implements Runnable {
         while (current != null) {
             String value =  (String)current.value;
             value = value.toLowerCase();
-            if (value.equals(word.toLowerCase())) {
+            if (value.compareToIgnoreCase(word)==0) {
                 return current;
             }
             current = current.next;
@@ -106,5 +162,21 @@ public class SearchList implements Runnable {
             current.lines.show();
             current = current.next;
         }
+
+        System.out.println();
+    }
+
+    public void printInFile() throws IOException {
+        FileWriter write = new FileWriter("../results/List.txt" , false);
+        PrintWriter print_line = new PrintWriter(write);
+        SearchCell current = this.first;
+        while (current != null) {
+            print_line.print(current.value + "\t");
+            current.lines.showInFile(write);
+            current = current.next;
+        }
+
+        print_line.println();
+        print_line.close();
     }
 }

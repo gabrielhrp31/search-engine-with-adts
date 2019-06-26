@@ -1,9 +1,15 @@
 package structures.btree;
 
 import structures.list.SearchList;
+import tools.printtools.PrintTools;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.io.IOException;
 
 public class Tree {
@@ -19,12 +25,25 @@ public class Tree {
 
     public void run(){
         Tree tree = null;
+        long beginTime, endTime;
+        ArrayList<Long> times = new ArrayList<>(); 
+        PrintTools pTools = new PrintTools();
         try {
-            System.out.println("Opening " + path + " for lecture of text");
-            tree = textReader(path, keywords);
+            System.out.println("-------------------------------------");
+            System.out.println("\tAvore Binária");
+            System.out.println();
+            for(int i=0;i<10;i++){
+                beginTime = System.nanoTime();
+                tree = textReader(path, keywords);
+                tree.print_in_file();
+                endTime = System.nanoTime();
+                times.add(endTime-beginTime);
+            }
+            pTools.printTimeInFiles(times, "Tree");
             tree.print();
+           
         } catch (IOException e) {
-            System.err.printf("Erro na abertura do arquivo: %s.\n",e.getMessage());
+            System.err.printf("Error while opening the file: %s.\n",e.getMessage());
         }
     }
 
@@ -79,8 +98,30 @@ public class Tree {
     }
 
 
+    private void print_in_file() throws IOException{
+        FileWriter write = new FileWriter("../results/Tree.txt", false);
+        PrintWriter print_line = new PrintWriter(write);
+        print_in_file_recursive(this.root,write, print_line);
+        print_line.close();
+    }
+
+    private void print_in_file_recursive(Node node,FileWriter writer, PrintWriter pWriter){
+        if (node == null) {
+            return;
+        }
+
+        this.print_in_file_recursive(node.left, writer, pWriter);
+
+        pWriter.print(node.word + "\t");
+        node.lines.showInFile(writer);
+
+        this.print_in_file_recursive(node.right, writer, pWriter);
+    }
+
+
     public void print(){
         this.print_recursive(this.root);
+        System.out.println();
     }
 
     private void print_recursive(Node node) {

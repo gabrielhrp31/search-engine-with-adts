@@ -1,5 +1,9 @@
 package structures.hash;
 
+import structures.list.List;
+
+import java.util.Arrays;
+
 /**
  *  Linked Linear List for each address of the table,
  *  that way all keys with the same address are linked in
@@ -8,35 +12,38 @@ package structures.hash;
 public class LinkedHashMap {
 
     private int tableSize;
-    private SelfReferenceList[] hmLinkedTable;
-    private int weights[];
+    private LinkedHashCell[] hmLinkedTable;
+    private int[] weights;
 
 
-    public LinkedHashMap(int tableSize, int maxKeySize) {
+    public LinkedHashMap(int tableSize) {
         this.tableSize = tableSize;
-        this.hmLinkedTable = new SelfReferenceList[tableSize];
+        this.hmLinkedTable = new LinkedHashCell[tableSize];
         for (int i = 0; i < tableSize; i++)
-            this.hmLinkedTable[i] = new SelfReferenceList();
+            this.hmLinkedTable[i] = null;
 
-        this.weights = HashMapUtil.generateWeights(maxKeySize, tableSize);
-
-
+        this.weights = HashMapUtil.generateWeights(tableSize);
     }
 
 
-    public Object search(String key) {
-        int i = HashMapUtil.h(key, this.weights, tableSize);
-        if (this.hmLinkedTable[i].empty()){
-            //didnt found
-            return null;
+
+    public void add(String keyword, int line) {
+        int h = HashMapUtil.h(keyword,this.weights,this.tableSize);
+        if(hmLinkedTable[h] == null){
+            List list = new List();
+            list.add(line);
+            hmLinkedTable[h] = new LinkedHashCell(keyword,list);
         } else {
-            HashMapCell cell = (HashMapCell) this.hmLinkedTable[i].search(new HashMapCell(key,null));
-            if(cell == null){
-                // didnt found
-                return null;
+            LinkedHashCell hashCell = hmLinkedTable[h];
+            while (hashCell.getNext() != null && hashCell.getKeyWord().compareToIgnoreCase(keyword) != 0){
+                hashCell = hashCell.getNext();
+            }
+            if(hashCell.getKeyWord().compareToIgnoreCase(keyword) == 0){
+                hashCell.setLines(line);
             } else {
-                // founded
-                return cell.item;
+                List list2 = new List();
+                list2.add(line);
+                hashCell.setNext(new LinkedHashCell(keyword,list2));
             }
         }
 
@@ -44,25 +51,12 @@ public class LinkedHashMap {
 
 
 
-    public void add(String key, Object item) {
-
-        if(this.search(key) == null){
-            int i = HashMapUtil.h(key,this.weights,this.tableSize);
-            this.hmLinkedTable[i].add(new HashMapCell(key, item));
-        } else {
-            System.out.println("Register already exists!");
-        }
-
-    }
-
-
-
-    public void remove(String key) throws Exception {
-
-        int i = HashMapUtil.h(key,weights,this.tableSize);
-        HashMapCell cell = (HashMapCell) this.hmLinkedTable[i].remove(new HashMapCell(key,null));
-        if(cell == null) {
-            System.out.println("Register not found!");
-        }
+    @Override
+    public String toString() {
+        return "LinkedHashMap{" +
+                "tableSize=" + tableSize +
+                ", hmLinkedTable=" + Arrays.toString(hmLinkedTable) +
+                ", weights=" + Arrays.toString(weights) +
+                '}';
     }
 }
