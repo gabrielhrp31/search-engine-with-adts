@@ -1,6 +1,7 @@
 import structures.avltree.AVLTree;
 import structures.btree.Tree;
 import structures.hash.HashMapTable;
+import structures.hash.LinkedHashMap;
 import structures.list.SearchList;
 
 import java.io.BufferedReader;
@@ -12,7 +13,7 @@ public class Main {
     public static int hashSize =1007 ;
 
     public static void main(String[] args) {
-        String path = args[0];
+        String path =args[0];
         String keywordPath = args[1];
         SearchList keywords = null;
         try {
@@ -32,6 +33,8 @@ public class Main {
         avltree.run();
         HashMapTable hashMapTable = new HashMapTable(hashSize, path, keywords);
         hashMapTable.run();
+        LinkedHashMap linkedHashMap = new LinkedHashMap(hashSize,path,keywords);
+        linkedHashMap.run();
     }
 
     public static SearchList keywordReader(String path) throws IOException {

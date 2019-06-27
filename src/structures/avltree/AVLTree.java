@@ -3,7 +3,8 @@ package structures.avltree;
 import java.io.*;
 import structures.list.SearchList;
 import java.util.ArrayList;
-import tools.printtools.PrintTools;
+
+import tools.PrintTools;
 
 public class AVLTree implements Runnable{
 
@@ -24,7 +25,7 @@ public class AVLTree implements Runnable{
 
         try {
             System.out.println("-------------------------------------");
-            System.out.println("AVLTree");
+            System.out.println("AVL Tree");
             System.out.println();
             for (int i = 0; i < 10; i++) {
                 beginTime = System.nanoTime();

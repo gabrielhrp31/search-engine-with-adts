@@ -5,17 +5,17 @@ programming	1 7
 
 
 ----Tempo Gasto em NanoSegundos----
-Iteração 1: 10762024
-Iteração 2: 92017623
-Iteração 3: 24760673
-Iteração 4: 6752541
-Iteração 5: 5766273
-Iteração 6: 5006535
-Iteração 7: 4720453
-Iteração 8: 3693891
-Iteração 9: 3147604
-Iteração 10: 1892037
+Iteração 1: 9340101
+Iteração 2: 1468020
+Iteração 3: 1309397
+Iteração 4: 1207495
+Iteração 5: 1024956
+Iteração 6: 1010492
+Iteração 7: 860653
+Iteração 8: 876515
+Iteração 9: 776768
+Iteração 10: 990423
 
-Menor Tempo: 1892037
-Maior Tempo: 92017623
-Tempo Medio: 15851965
+Menor Tempo: 776768
+Maior Tempo: 9340101
+Tempo Medio: 1886482

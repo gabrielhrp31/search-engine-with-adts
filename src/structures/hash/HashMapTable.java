@@ -1,13 +1,13 @@
 package structures.hash;
 
 import structures.list.List;
-
-import java.util.Arrays;
+import structures.list.SearchList;
+import tools.PrintTools;
 
 import java.io.*;
-import structures.list.SearchList;
 import java.util.ArrayList;
-import tools.printtools.PrintTools;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class HashMapTable implements Runnable{
 
@@ -17,44 +17,69 @@ public class HashMapTable implements Runnable{
     private String path;
     private SearchList keywords;
 
+    public HashMapTable(int tableSize,String path, SearchList keywords){
+        this.tableSize = tableSize;
+        this.hashTable = new HashMapCell[this.tableSize];
+        //initializing
+        for (int i = 0; i < this.tableSize; i++) {
+            this.hashTable[i] = null;
+        }
+        this.keywords = keywords;
+        this.path = path;
+        this.weight = HashMapUtil.generateWeights(tableSize);
+    }
 
+
+    @Override
     public void run() {
+       printInfo(0);
+       printInfo(1);
+       printInfo(2);
+
+    }
+
+    private String collisionResolution(int opt){
+        switch (opt){
+            case 0 :
+                return  "linear probing";
+            case 1:
+                 return "quadratic probing";
+            default:
+                return "double hashing";
+        }
+    }
+
+    private void printInfo(int opt){
         HashMapTable hashMapTable = null;
         long beginTime, endTime;
         ArrayList<Long> times = new ArrayList<>();
         PrintTools pTools = new PrintTools();
 
         try {
+            System.out.println("-------------------------------------");
+            System.out.println("\tHashMap (OPEN HASH) -> "+collisionResolution(opt));
+            System.out.println();
             for (int i = 0; i < 10; i++) {
                 beginTime = System.nanoTime();
-                hashMapTable = textReader(path, keywords,0);
-                hashMapTable.print(0);
-                hashMapTable.printInFile(0);
+                hashMapTable = textReader(path, keywords,opt);
+                hashMapTable.printInFile(opt);
                 endTime = System.nanoTime();
                 times.add(endTime - beginTime);
             }
-            pTools.printTimeInFiles(times, "AVLTree");
+            hashMapTable.print(opt);
+            pTools.printTimeInFiles(times, "OpenHash-"+opt);
         } catch (IOException e) {
             System.err.printf("Error while opening the file: %s.\n", e.getMessage());
         }
+
     }
 
-    public HashMapTable(int tableSize,String path, SearchList keywords){
-        this.tableSize = tableSize;
-        this.hashTable = new HashMapCell[this.tableSize];
-        this.keywords = keywords;
-        this.path = path;
-        //initializing
-        for (int i = 0; i < this.tableSize; i++) {
-            this.hashTable[i] = null;
-        }
-        this.weight = HashMapUtil.generateWeights(tableSize);
-    }
 
-    public HashMapTable textReader(String path, SearchList keywords, int opt ) throws IOException {
+
+    private HashMapTable textReader(String path, SearchList keywords, int opt) throws IOException {
         BufferedReader buffRead = new BufferedReader(new FileReader(path));
 
-        String string = "";
+        String string;
         int index = 1;
 
         HashMapTable hashMapTable = new HashMapTable(tableSize, null, null);
@@ -62,9 +87,9 @@ public class HashMapTable implements Runnable{
         while (buffRead.ready()) {
 
             string = buffRead.readLine();
-            string = (String) string.replace(".", "");
-            string = (String) string.replace(",", "");
-            String[] words = string.split("\\s");
+            string = string.replace(".", "");
+            string = string.replace(",", "");
+            String[] words;
             words = string.trim().split("\\s+");
             for (String word : words) {
                 if (keywords.exists(word) != null)
@@ -148,31 +173,48 @@ public class HashMapTable implements Runnable{
 
 
 
-    public void print(int opt) {
+    private void print(int opt) {
         System.out.println("-------------------------------------");
-        System.out.println("Hash using option:"+opt);
+        System.out.println("Hash using collision resolution: "+collisionResolution(opt));
         System.out.println();
-        for (int i = 0; i < hashTable.length; i++) {
-            if (hashTable[i] != null) {
-                System.out.print(hashTable[i].getKeyWord());
-                hashTable[i].getLines().show();
+        ordenate();
+        for (HashMapCell hashMapCell : hashTable) {
+            if (hashMapCell != null) {
+                System.out.print(hashMapCell.getKeyWord() + " ");
+                hashMapCell.getLines().show();
             }
         }
 
     }
 
 
-    public void printInFile(int opt)throws IOException{
+    private void printInFile(int opt)throws IOException{
         FileWriter write = new FileWriter("../results/OpenHash-" +opt+ ".txt", false);
         PrintWriter print_line = new PrintWriter(write);
-        for(int i = 0; i < hashTable.length; i++){
-
-           if(hashTable[i] != null){
-               print_line.print(hashTable[i].getKeyWord()+" ");
-               hashTable[i].getLines().showInFile(write);
-           }
-        }
+        ordenate();
+        Arrays.stream(hashTable).filter(Objects::nonNull).forEach(hashMapCell -> {
+            print_line.print(hashMapCell.getKeyWord() + " ");
+            hashMapCell.getLines().showInFile(write);
+        });
         print_line.close();
 
+    }
+
+
+    private void ordenate(){
+        for(int i = 0; i < hashTable.length; i++){
+            if(hashTable[i] != null) {
+                for (int j = i; j < hashTable.length; j++) {
+                    if (hashTable[j] != null) {
+                        if (hashTable[i].getKeyWord().compareToIgnoreCase(hashTable[j].getKeyWord()) > 0) {
+                            HashMapCell aux = hashTable[i];
+                            hashTable[i] = hashTable[j];
+                            hashTable[j] = aux;
+                        }
+
+                    }
+                }
+            }
+        }
     }
 }

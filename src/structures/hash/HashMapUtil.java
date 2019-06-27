@@ -1,7 +1,5 @@
 package structures.hash;
 
-import structures.list.SearchList;
-
 import java.util.Random;
 
 public class HashMapUtil {

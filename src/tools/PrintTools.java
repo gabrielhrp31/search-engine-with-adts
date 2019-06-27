@@ -1,4 +1,4 @@
-package tools.printtools;
+package tools;
 
 import java.util.Collections;
 import java.io.FileWriter;

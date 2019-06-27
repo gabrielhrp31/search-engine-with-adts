@@ -1,13 +1,10 @@
 package structures.list;
 
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import tools.PrintTools;
+
+import java.io.*;
 import java.util.ArrayList;
-import tools.printtools.PrintTools;
 
 public class SearchList implements Runnable {
 

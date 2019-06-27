@@ -4,33 +4,17 @@ human-engineered 5
 programming 1 7 
 
 ----Tempo Gasto em NanoSegundos----
-Iteração 1: 1845333
-Iteração 2: 795703
-Iteração 3: 638492
-Iteração 4: 623403
-Iteração 5: 606854
-Iteração 6: 651161
-Iteração 7: 723486
-Iteração 8: 598349
-Iteração 9: 493982
-Iteração 10: 635702
+Iteração 1: 1801500
+Iteração 2: 867514
+Iteração 3: 881497
+Iteração 4: 877408
+Iteração 5: 876693
+Iteração 6: 875870
+Iteração 7: 837137
+Iteração 8: 796801
+Iteração 9: 774332
+Iteração 10: 787389
 
-Menor Tempo: 493982
-Maior Tempo: 1845333
-Tempo Medio: 761246
-
-----Tempo Gasto em NanoSegundos----
-Iteração 1: 4778593
-Iteração 2: 1303441
-Iteração 3: 1147107
-Iteração 4: 1090844
-Iteração 5: 1156788
-Iteração 6: 1209700
-Iteração 7: 1205722
-Iteração 8: 798452
-Iteração 9: 735671
-Iteração 10: 730454
-
-Menor Tempo: 730454
-Maior Tempo: 4778593
-Tempo Medio: 1415677
+Menor Tempo: 774332
+Maior Tempo: 1801500
+Tempo Medio: 937614

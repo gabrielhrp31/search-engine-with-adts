@@ -7,8 +7,8 @@ import structures.list.List;
  */
 public class HashMapCell {
 
-    String keyWord;
-    List lines;
+    public String keyWord;
+    public List lines;
     //control for removal operations, instead of erase the key
     boolean deleted;
 

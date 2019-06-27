@@ -1,16 +1,10 @@
 package structures.btree;
 
 import structures.list.SearchList;
-import tools.printtools.PrintTools;
+import tools.PrintTools;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.io.IOException;
 
 public class Tree {
     public Node root;
@@ -26,7 +20,7 @@ public class Tree {
     public void run(){
         Tree tree = null;
         long beginTime, endTime;
-        ArrayList<Long> times = new ArrayList<>(); 
+        ArrayList<Long> times = new ArrayList<>();
         PrintTools pTools = new PrintTools();
         try {
             System.out.println("-------------------------------------");
@@ -41,7 +35,7 @@ public class Tree {
             }
             pTools.printTimeInFiles(times, "Tree");
             tree.print();
-           
+
         } catch (IOException e) {
             System.err.printf("Error while opening the file: %s.\n",e.getMessage());
         }

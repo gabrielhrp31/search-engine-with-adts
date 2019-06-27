@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 
 public class List {
 
-    ListCell first, last;
+    public ListCell first, last;
     int length;
 
     public List(){
