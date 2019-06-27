@@ -23,7 +23,7 @@ public class Main {
         }
 
 
-        System.out.println("Quantidade de palavras chave: "+hashSize);
+        System.out.println("Quantidade de palavras chave: "+keywords.length);
 
         SearchList searchList = new SearchList(path,keywords);
         searchList.run();
