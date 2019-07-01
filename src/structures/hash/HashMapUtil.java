@@ -19,7 +19,7 @@ public class HashMapUtil {
     }
 
     /**
-     * Hash function Nivio Ziviane
+     * Hash function Nivio Ziviani
      * @param key
      * @param weight
      * @param tableSize
