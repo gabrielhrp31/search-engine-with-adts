@@ -29,12 +29,12 @@ public class Tree {
             for(int i=0;i<10;i++){
                 beginTime = System.nanoTime();
                 tree = textReader(path, keywords);
-                tree.print_in_file();
+                tree.printInFile();
                 endTime = System.nanoTime();
                 times.add(endTime-beginTime);
             }
             pTools.printTimeInFiles(times, "Tree");
-            tree.print();
+            tree.show();
 
         } catch (IOException e) {
             System.err.printf("Error while opening the file: %s.\n",e.getMessage());
@@ -92,28 +92,28 @@ public class Tree {
     }
 
 
-    private void print_in_file() throws IOException{
+    private void printInFile() throws IOException{
         FileWriter write = new FileWriter("../results/Tree.txt", false);
         PrintWriter print_line = new PrintWriter(write);
-        print_in_file_recursive(this.root,write, print_line);
+        printInFileRecursive(this.root,write, print_line);
         print_line.close();
     }
 
-    private void print_in_file_recursive(Node node,FileWriter writer, PrintWriter pWriter){
+    private void printInFileRecursive(Node node,FileWriter writer, PrintWriter pWriter){
         if (node == null) {
             return;
         }
 
-        this.print_in_file_recursive(node.left, writer, pWriter);
+        this.printInFileRecursive(node.left, writer, pWriter);
 
         pWriter.print(node.word + "\t");
         node.lines.showInFile(writer);
 
-        this.print_in_file_recursive(node.right, writer, pWriter);
+        this.printInFileRecursive(node.right, writer, pWriter);
     }
 
 
-    public void print(){
+    public void show(){
         this.print_recursive(this.root);
         System.out.println();
     }

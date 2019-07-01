@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class Main {
 
-    public static int hashSize =1007 ;
+    public static int hashSize =1009 ;
 
     public static void main(String[] args) {
         String path =args[0];

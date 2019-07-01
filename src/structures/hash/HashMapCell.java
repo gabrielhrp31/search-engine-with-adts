@@ -62,13 +62,4 @@ public class HashMapCell {
         }
 
     }
-
-    @Override
-    public String toString() {
-        return "HashMapCell{" +
-                "keyWord='" + keyWord + '\'' +
-                ", lines=" + lines +
-                ", deleted=" + deleted +
-                '}';
-    }
 }

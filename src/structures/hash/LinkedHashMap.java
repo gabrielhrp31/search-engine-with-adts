@@ -159,14 +159,4 @@ public class LinkedHashMap implements Runnable{
     }
 
 
-    @Override
-    public String toString() {
-        return "LinkedHashMap{" +
-                "tableSize=" + tableSize +
-                ", hmLinkedTable=" + Arrays.toString(hmLinkedTable) +
-                ", weights=" + Arrays.toString(weights) +
-                '}';
-    }
-
-
 }
