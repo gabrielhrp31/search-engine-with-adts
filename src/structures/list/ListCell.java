@@ -2,11 +2,7 @@ package structures.list;
 
 public class ListCell {
 
-    public ListCell next;
-    public Object value;
+    public ListCell next=null;
+    public Object value=null;
 
-    ListCell(){
-        this.next=null;
-        this.value = null;
-    }
 }
